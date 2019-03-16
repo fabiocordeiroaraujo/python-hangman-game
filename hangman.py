@@ -3,68 +3,7 @@
 
 # Import
 import random
-
-# Board (tabuleiro)
-board = ['''
-
->>>>>>>>>>Hangman<<<<<<<<<<
-
-+---+
-|   |
-    |
-    |
-    |
-    |
-=========''', '''
-
-+---+
-|   |
-O   |
-    |
-    |
-    |
-=========''', '''
-
-+---+
-|   |
-O   |
-|   |
-    |
-    |
-=========''', '''
-
- +---+
- |   |
- O   |
-/|   |
-     |
-     |
-=========''', '''
-
- +---+
- |   |
- O   |
-/|\  |
-     |
-     |
-=========''', '''
-
- +---+
- |   |
- O   |
-/|\  |
-/    |
-     |
-=========''', '''
-
- +---+
- |   |
- O   |
-/|\  |
-/ \  |
-     |
-=========''']
-
+import board
 
 # Classe
 class Hangman:
@@ -93,7 +32,7 @@ class Hangman:
 
     # Método para verificar se o jogador venceu
     def hangman_won(self):
-        return len(self.word) == len(self.word_letters)
+        return "_" not in self.hide_word()
 
     # Método para não mostrar a letra no board
     def hide_word(self):
@@ -107,7 +46,7 @@ class Hangman:
 
     # Método para checar o status do game e imprimir o board na tela
     def print_game_status(self):
-        print(board[self.board_level])
+        print(board.board[self.board_level])
         print("Letras erradas: %s" % self.wrong_letters)
         print(self.hide_word())
 
