@@ -4,6 +4,9 @@
 # Import
 import random
 import board
+import os
+
+clear = lambda: os.system('clear')
 
 # Classe
 class Hangman:
@@ -48,6 +51,7 @@ class Hangman:
 
     # Método para checar o status do game e imprimir o board na tela
     def print_game_status(self):
+        clear()
         print(board.board[self.board_level])
         wrong_letters = ['Wrong letters: %s', 'Letras equivocadas: %s', 'Letras erradas: %s']                   
         print(wrong_letters[(int(self.language)) - 1] % self.wrong_letters)
