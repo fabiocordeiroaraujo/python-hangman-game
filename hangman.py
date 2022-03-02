@@ -71,19 +71,25 @@ def rand_word(language):
             bank = f.readlines()
     return bank[random.randint(0, len(bank))].strip()
 
+# Função para selecionar o idioma preferido do jogador
+def select_language():   
+    print('\n#####################################################################################')
+    print('# Select the language                                                               #')
+    print('#                                                                                   #')    
+    language = input('# English: 1                                                                        #\n# Español: 2                                                                        #\n# Português: 3                                                                      #\n#                                                                                   #\n#####################################################################################\n\n')
+    return language
 
 # Função Main - Execução do Programa
 def main():
 
-    clear()
-    print('\n#####################################################################################')
-    print('# Select the language                                                               #')
-    print('#                                                                                   #')
-    # Seleciona o idioma que deseja jogar
-    language = input('# English: 1                                                                        #\n# Español: 2                                                                        #\n# Português: 3                                                                      #\n#                                                                                   #\n#####################################################################################\n\n')
-
-    # Objeto
-    game = Hangman(rand_word(language), language)
+    # Limpa o console
+    clear()    
+    # Configura o idioma
+    language = select_language()
+    # Recupera a palavra secreta
+    word = rand_word(language)
+    # Cria o jogo
+    game = Hangman(word, language)
 
     # Enquanto o jogo não tiver terminado, print do status, solicita uma letra
     # e faz a leitura do caracter
