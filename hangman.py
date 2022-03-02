@@ -9,10 +9,11 @@ import board
 class Hangman:
 
     # Método Construtor
-    def __init__(self, word):
+    def __init__(self, word, language):
         self.word = word
         self.wrong_letters = []
         self.word_letters = []
+        self.language = language
         self.board_level = 0
 
     # Método para adivinhar a letra
@@ -24,7 +25,8 @@ class Hangman:
             self.wrong_letters.append(upper_letter)
             self.board_level = self.board_level + 1
         else:
-            print("\nLetra já informada!!!")
+            letter_already_informed = ['\nLetter already informed!!!', '\nLetras ya informadas!!!', '\nLetra já informada!!!']           
+            print(letter_already_informed[(int(self.language)) - 1])
 
     # Método para verificar se o jogo terminou
     def hangman_over(self):
@@ -47,39 +49,53 @@ class Hangman:
     # Método para checar o status do game e imprimir o board na tela
     def print_game_status(self):
         print(board.board[self.board_level])
-        print("Letras erradas: %s" % self.wrong_letters)
+        wrong_letters = ['Wrong letters: %s', 'Letras equivocadas: %s', 'Letras erradas: %s']                   
+        print(wrong_letters[(int(self.language)) - 1] % self.wrong_letters)
         print(self.hide_word())
 
 
 # Função para ler uma palavra de forma aleatória do banco de palavras
-def rand_word():
-    with open("palavras.txt", "rt") as f:
-        bank = f.readlines()
+def rand_word(language):
+    if language == "1":
+        with open("words/en.txt", "rt") as f:
+            bank = f.readlines()
+    elif language == "2":
+        with open("words/es.txt", "rt") as f:
+            bank = f.readlines()
+    else:
+        with open("words/pt-br.txt", "rt") as f:
+            bank = f.readlines()
     return bank[random.randint(0, len(bank))].strip()
 
 
 # Função Main - Execução do Programa
 def main():
+
+    # Seleciona o idioma que deseja jogar
+    language = input("\nEnglish: 1\nEspañol: 2\nPortuguês: 3\n\n")
+
     # Objeto
-    game = Hangman(rand_word())
+    game = Hangman(rand_word(language), language)
 
     # Enquanto o jogo não tiver terminado, print do status, solicita uma letra
     # e faz a leitura do caracter
     while(not game.hangman_over()):
         # Verifica o status do jogo
         game.print_game_status()
-        letter = input("\nAdivinhe uma letra da palavra mágica: ")
+        guess_a_letter = ['\nGuess a letter of the magic word: ', '\nAdivina una letra de la palabra mágica: ', '\nAdivinhe uma letra da palavra mágica: ']           
+        letter = input(guess_a_letter[(int(language)) - 1])
         game.guess(letter)
 
     # De acordo com o status, imprime mensagem na tela para o usuário
     if game.hangman_won():
         game.print_game_status()
-        print('\nParabéns! Você venceu!!')
+        congratulations = ['\nCongratulations! You won!', '\n¡Felicidades! ¡Ganaste!', '\nParabéns! Você venceu!']           
+        print(congratulations[(int(language)) - 1])
     else:
-        print('\nGame over! Você perdeu.')
-        print('A palavra era ' + game.word)
-
-    print('\nFoi bom jogar com você! Agora vá estudar!\n')
+        game_over = ['\nGame over! You lost!', '\n¡Juego terminado! ¡Tú perdiste!', '\nGame over! Você perdeu!']           
+        print(game_over[(int(language)) - 1])       
+        the_word_was = ['The word was ', 'La palabra era ', 'A palavra era ']           
+        print(the_word_was[(int(language)) - 1] + game.word)
 
 
 # Executa o programa
