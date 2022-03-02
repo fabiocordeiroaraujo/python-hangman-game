@@ -19,6 +19,10 @@ class Hangman:
         self.language = language
         self.board_level = 0
 
+    # Método para verificar se o jogo terminou
+    def hangman_over(self):
+        return self.hangman_won() or self.board_level == 6
+
     # Método para adivinhar a letra
     def guess(self, letter):
         upper_letter = letter.upper()
@@ -29,11 +33,7 @@ class Hangman:
             self.board_level = self.board_level + 1
         else:
             letter_already_informed = ['\nLetter already informed!!!', '\nLetras ya informadas!!!', '\nLetra já informada!!!']           
-            print(letter_already_informed[(int(self.language)) - 1])
-
-    # Método para verificar se o jogo terminou
-    def hangman_over(self):
-        return self.hangman_won() or self.board_level == 6
+            print(letter_already_informed[(int(self.language)) - 1])    
 
     # Método para verificar se o jogador venceu
     def hangman_won(self):
@@ -73,10 +73,11 @@ def rand_word(language):
 
 # Função para selecionar o idioma preferido do jogador
 def select_language():   
-    print('\n#####################################################################################')
-    print('# Select the language                                                               #')
-    print('#                                                                                   #')    
-    language = input('# English: 1                                                                        #\n# Español: 2                                                                        #\n# Português: 3                                                                      #\n#                                                                                   #\n#####################################################################################\n\n')
+    print('\n')
+    print('-----------------------------------------------------------------------------------------------------------')
+    print('- Select the language -------------------------------------------------------------------------------------')
+    print('-----------------------------------------------------------------------------------------------------------')    
+    language = input('- English: 1 ----------------------------------------------------------------------------------------------\n- Spanish: 2 ----------------------------------------------------------------------------------------------\n- Portugues: 3 --------------------------------------------------------------------------------------------\n-----------------------------------------------------------------------------------------------------------\n-----------------------------------------------------------------------------------------------------------\n\n')
     return language
 
 # Função Main - Execução do Programa
