@@ -75,8 +75,12 @@ def rand_word(language):
 # Função Main - Execução do Programa
 def main():
 
+    clear()
+    print('\n#####################################################################################')
+    print('# Select the language                                                               #')
+    print('#                                                                                   #')
     # Seleciona o idioma que deseja jogar
-    language = input("\nEnglish: 1\nEspañol: 2\nPortuguês: 3\n\n")
+    language = input('# English: 1                                                                        #\n# Español: 2                                                                        #\n# Português: 3                                                                      #\n#                                                                                   #\n#####################################################################################\n\n')
 
     # Objeto
     game = Hangman(rand_word(language), language)
